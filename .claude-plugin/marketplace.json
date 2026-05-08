@@ -1,0 +1,23 @@
+{
+    "name": "titon",
+    "owner": {
+        "name": "Titon Network",
+        "url": "https://github.com/titon-network"
+    },
+    "plugins": [
+        {
+            "name": "titon",
+            "source": "./titon",
+            "description": "AI-first interface for dapp authors building on the Titon network. Slash commands for Kronos automation (recurring on-chain jobs, TSA-audited — zero findings) and Fortuna threshold-BLS VRF (verifiable randomness, TSA-audited — zero findings). Skills ship in TypeScript and Python flavours — every TS recipe has a parallel `*-python` skill backed by titon-network-{kronos,fortuna}-sdk on PyPI. Auto-loads the right recipe when your conversation matches. More dev-facing protocols as they ship.",
+            "version": "0.5.0",
+            "author": {
+                "name": "Titon Network",
+                "url": "https://github.com/titon-network"
+            },
+            "homepage": "https://github.com/titon-network/plugin",
+            "repository": "https://github.com/titon-network/plugin",
+            "license": "MIT",
+            "tags": ["ton", "kronos", "fortuna", "automation", "vrf", "randomness", "dapp", "blockchain", "tolk", "titon", "python", "typescript"]
+        }
+    ]
+}

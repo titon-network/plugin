@@ -1,0 +1,24 @@
+{
+    "name": "titon",
+    "version": "0.5.0",
+    "description": "Slash commands for working with Titon network protocols. Kronos automation (TSA-audited — zero findings; register jobs, run automatons, decode events, debug exit codes) and Fortuna threshold-BLS VRF (TSA-audited — zero findings; integrate consumers, monitor randomness, debug exit codes) on equal footing; ForgeTON pool ops surfaced through both. Skills ship in TypeScript + Python flavours — every TS recipe has a parallel `*-python` skill backed by titon-network-{kronos,fortuna}-sdk on PyPI. More protocols as they ship.",
+    "author": {
+        "name": "Titon Network",
+        "url": "https://github.com/titon-network"
+    },
+    "homepage": "https://github.com/titon-network/plugin",
+    "repository": "https://github.com/titon-network/plugin",
+    "license": "MIT",
+    "keywords": [
+        "ton",
+        "kronos",
+        "fortuna",
+        "forgeton",
+        "titon",
+        "automation",
+        "vrf",
+        "randomness",
+        "automaton",
+        "blockchain"
+    ]
+}
