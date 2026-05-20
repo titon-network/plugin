@@ -1,3 +1,10 @@
 .DS_Store
 *.log
 node_modules/
+
+# Local env (never in public repo)
+.env
+.env.local
+
+# Claude Code workspace settings
+.claude/

@@ -1,6 +1,6 @@
 # titon plugin
 
-Skills for **dapp authors building on the Titon network**. Today: Kronos automation (recurring on-chain jobs) and Fortuna threshold-BLS VRF (verifiable randomness). Tomorrow: more dev-facing protocols as they ship.
+Skills for **dapp authors building on the Titon network**. Today: Kronos automation (recurring on-chain jobs), Fortuna threshold-BLS VRF (verifiable randomness), and Phoebe price oracle (threshold-BLS Merkle-root price snapshots). Tomorrow: more dev-facing protocols as they ship.
 
 Installed via Claude Code's plugin marketplace — see the [marketplace README](../README.md).
 
@@ -25,7 +25,12 @@ titon/
 │   ├── kronos-debug-exit-code/        # diagnose a failed tx by exit code
 │   ├── fortuna-integrate-consumer/    # add VRF to a product (the main one)
 │   ├── fortuna-monitor-events/        # indexer for VRF lifecycle
-│   └── fortuna-debug-exit-code/       # diagnose a failed VRF tx
+│   ├── fortuna-debug-exit-code/       # diagnose a failed VRF tx
+│   ├── phoebe-integrate-consumer/     # pull verified prices from a Tolk consumer (the main one)
+│   ├── phoebe-pull-fresh-price/       # mode-B Pyth-style update + read for sub-heartbeat freshness
+│   ├── phoebe-handle-event/           # indexer / dashboard / alerting for the price-oracle event stream
+│   ├── phoebe-debug-revert/           # diagnose a failed Phoebe tx by exit code
+│   └── phoebe-deploy-and-admit/       # stand up Phoebe + wire to Atlas + ForgeTON
 └── README.md  ← you are here
 ```
 
@@ -45,8 +50,9 @@ Each `SKILL.md` is the production version of the corresponding skill in the prot
 
 - Kronos skills mirror [`titon-network/kronos`](https://github.com/titon-network/kronos) under `sdks/typescript/skills/` (TS) and `sdks/python/skills/` (Python).
 - Fortuna skills mirror [`titon-network/fortuna`](https://github.com/titon-network/fortuna) under `sdks/typescript/skills/` (TS) and `sdks/python/skills/` (Python).
+- Phoebe skills mirror [`titon-network/phoebe`](https://github.com/titon-network/phoebe) under `sdks/typescript/skills/` (TS) — Python parity ships in a follow-up alongside the PyPI release of `titon-network-phoebe-sdk`.
 
-Updates flow from there. The plugin tracks the published SDK majors (currently `@titon-network/kronos-sdk@0.8.4` + `@titon-network/fortuna-sdk@0.4.0` on npm; `titon-network-kronos-sdk==0.8.4` + `titon-network-fortuna-sdk==0.4.0` on PyPI); pin a plugin version if you need stability across upgrades.
+Updates flow from there. The plugin tracks the published SDK majors (currently `@titon-network/kronos-sdk@0.8.4` + `@titon-network/fortuna-sdk@0.4.0` + `@titon-network/phoebe-sdk@0.1.0-alpha.0` on npm; `titon-network-kronos-sdk==0.8.4` + `titon-network-fortuna-sdk==0.4.0` on PyPI); pin a plugin version if you need stability across upgrades.
 
 ## Conventions
 

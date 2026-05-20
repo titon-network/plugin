@@ -8,8 +8,8 @@
         {
             "name": "titon",
             "source": "./titon",
-            "description": "AI-first interface for dapp authors building on the Titon network. Slash commands for Kronos automation (recurring on-chain jobs, TSA-audited — zero findings) and Fortuna threshold-BLS VRF (verifiable randomness, TSA-audited — zero findings). Skills ship in TypeScript and Python flavours — every TS recipe has a parallel `*-python` skill backed by titon-network-{kronos,fortuna}-sdk on PyPI. Auto-loads the right recipe when your conversation matches. More dev-facing protocols as they ship.",
-            "version": "0.5.0",
+            "description": "AI-first interface for dapp authors building on the Titon network. Skills for Kronos automation (recurring on-chain jobs, TSA-audited — zero findings), Fortuna threshold-BLS VRF (verifiable randomness, TSA-audited — zero findings), Phoebe price oracle (BLS-attested merkle-root snapshots, TSA-audited — zero findings; consume verified prices with `fetchVerifiedPrice`), and Themis sealed-bid threshold-decryption (MEV-resistant intent execution, TSA-audited — zero findings; deploy a per-dapp chamber + write a Tolk RevealCallback consumer). Auto-loads the right recipe when your conversation matches. Kronos/Fortuna recipes ship in TypeScript + Python flavours; Phoebe + Themis are TypeScript today.",
+            "version": "0.7.0",
             "author": {
                 "name": "Titon Network",
                 "url": "https://github.com/titon-network"
@@ -17,7 +17,7 @@
             "homepage": "https://github.com/titon-network/plugin",
             "repository": "https://github.com/titon-network/plugin",
             "license": "MIT",
-            "tags": ["ton", "kronos", "fortuna", "automation", "vrf", "randomness", "dapp", "blockchain", "tolk", "titon", "python", "typescript"]
+            "tags": ["ton", "kronos", "fortuna", "phoebe", "themis", "automation", "vrf", "randomness", "price-oracle", "sealed-bid", "threshold-decryption", "mev-resistant", "merkle-proof", "bls", "dapp", "blockchain", "tolk", "titon", "python", "typescript"]
         }
     ]
 }
