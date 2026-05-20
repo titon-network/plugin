@@ -2,7 +2,7 @@
 
 Claude Code plugin marketplace for the Titon network. **One install gives any AI agent a fluent vocabulary for shipping a Titon-integrated dapp** — from "I need verifiable randomness" to deployed contract in one focused conversation. Four products on equal footing: Kronos automation, Fortuna threshold-BLS VRF, Phoebe price oracle, and Themis sealed-bid threshold-decryption. More dev-facing protocols as they ship.
 
-> **Live on TON mainnet.** All four protocols TSA-audited (zero findings) and live on testnet + mainnet. Skill examples default to testnet for safe iteration; flip the SDK constant import (`KRONOS_TESTNET → KRONOS_MAINNET`, etc.) and the same recipes drive production. Pinned SDKs: `@titon-network/{kronos-sdk@0.8.5,fortuna-sdk@0.6.0,phoebe-sdk@0.5.0,themis-sdk@0.3.0}` (npm); Kronos/Fortuna additionally on PyPI as `titon-network-{kronos,fortuna}-sdk`.
+> **Live on TON mainnet.** All four protocols TSA-audited (zero findings) and live on testnet + mainnet. Skill examples default to testnet for safe iteration; flip the SDK constant import (`KRONOS_TESTNET → KRONOS_MAINNET`, etc.) and the same recipes drive production. Pinned SDKs: `@titon-network/{kronos-sdk@0.8.5,fortuna-sdk@0.6.0,phoebe-sdk@0.5.0,themis-sdk@0.3.0}` (npm); Kronos / Fortuna / Phoebe additionally on PyPI as `titon-network-{kronos,fortuna,phoebe}-sdk@0.5.0` and friends.
 
 Built for **dapp authors**. Infrastructure-side surfaces (forgeton pool admin, atlas DKG bootstrap, automaton operator ops, multi-op share-exchange) are titon-internal and live in their own SDK skill bundles for the audiences that need them.
 
@@ -17,9 +17,9 @@ That's it. Restart Claude Code to load the skills.
 
 ## What you get
 
-After `/plugin install titon`, **32 skills** become available across four protocols. Kronos and Fortuna recipes ship in two flavours (TypeScript + Python, kept in lockstep); Phoebe and Themis are TypeScript today (Python parity follow-up). Claude **auto-loads** the right one when your conversation matches (e.g. "I want to schedule a periodic on-chain call from a TS Blueprint project" → `kronos-register-job`; "read TON/USD from Phoebe" → `phoebe-consume-price`; "build a sealed-bid auction" → `themis-integrate-consumer`). You can also invoke explicitly with `/titon:<skill-name>`.
+After `/plugin install titon`, **38 skills** become available across four protocols (16 Kronos + 6 Fortuna + 12 Phoebe + 4 Themis). Kronos / Fortuna / Phoebe recipes ship in two flavours (TypeScript + Python, kept in lockstep — 8 TS + 8 Python for Kronos, 3 TS + 3 Python for Fortuna, 6 TS + 6 Python for Phoebe); Themis is TypeScript today (Python parity follow-up). Claude **auto-loads** the right one when your conversation matches (e.g. "I want to schedule a periodic on-chain call from a TS Blueprint project" → `kronos-register-job`; "read TON/USD from Phoebe in a Python service" → `phoebe-consume-price-python`; "build a sealed-bid auction" → `themis-integrate-consumer`). You can also invoke explicitly with `/titon:<skill-name>`.
 
-The TS skills are backed by `@titon-network/{kronos,fortuna,phoebe,themis}-sdk` on npm; the Python skills by `titon-network-{kronos,fortuna}-sdk` on PyPI. Same on-chain protocols, same TSA-audited bytecode — pick the language that matches your stack.
+The TS skills are backed by `@titon-network/{kronos,fortuna,phoebe,themis}-sdk` on npm; the Python skills by `titon-network-{kronos,fortuna,phoebe}-sdk` on PyPI. Same on-chain protocols, same TSA-audited bytecode — pick the language that matches your stack.
 
 ### Kronos — decentralized automation
 
@@ -50,13 +50,14 @@ Add unbiasable randomness to a product contract: raffle, NFT trait roll, dice, l
 
 Pull verified on-chain prices into your dapp: vault collateralisation, lending markups, perp / options settlement, liquidation gates. Operators heartbeat a BLS-attested merkle root every ~30s; consumers pull individual feeds with one `BLS_VERIFY` + one cell-walk. **🛡️ TSA-audited — zero findings**.
 
-| TypeScript skill | Auto-loads when… |
-|------------------|------------------|
-| `phoebe-consume-price` | You're reading a price from a **TS/frontend layer** — `fetchVerifiedPrice` fetches leaves from operator HTTP, verifies the merkle root against on-chain, returns `(leaf, proof)` |
-| `phoebe-integrate-consumer` | You're writing the **Tolk consumer contract** that receives `FulfillPrice` (Mode A cached + Mode B fresh-update) |
-| `phoebe-deploy-and-admit` | You're standing up a Phoebe instance (testnet / mainnet) |
-| `phoebe-handle-event` | You're decoding Phoebe events for an indexer / dashboard |
-| `phoebe-debug-revert` | You hit a revert and want the exit code → root-cause map |
+| TypeScript skill | Python skill | Auto-loads when… |
+|------------------|--------------|------------------|
+| `phoebe-consume-price` | `phoebe-consume-price-python` | You're reading a price from a TS/frontend layer (`fetchVerifiedPrice`) OR a Python service / backend (`fetch_verified_price`) — fetches leaves from operator HTTP, verifies the merkle root against on-chain, returns `(leaf, proof)` |
+| `phoebe-integrate-consumer` | `phoebe-integrate-consumer-python` | You're writing the **Tolk consumer contract** that receives `FulfillPrice` (Mode A cached + Mode B fresh-update). Tolk is identical across the pair; the Python sibling covers the pytoniq trigger + live-testnet test pattern |
+| `phoebe-pull-fresh-price` | `phoebe-pull-fresh-price-python` | You need sub-heartbeat freshness — Pyth-style update + read; attach a freshly-signed snapshot inline (~73k gas vs ~18k for cached) |
+| `phoebe-deploy-and-admit` | `phoebe-deploy-and-admit-python` | You're standing up a Phoebe instance (testnet / mainnet). Python sibling covers Phoebe-side deploy + verify; cross-contract admit (SetVerifier / SetConsumer) still routes through the TS wire script today |
+| `phoebe-handle-event` | `phoebe-handle-event-python` | You're decoding Phoebe events for an indexer / dashboard / alerting bot |
+| `phoebe-debug-revert` | `phoebe-debug-revert-python` | You hit a revert and want the exit code → root-cause map |
 
 ### Themis — sealed-bid threshold-decryption
 
@@ -105,8 +106,8 @@ Then ask Claude "I want to integrate Fortuna VRF from Python" — `fortuna-integ
 
 ## What's coming
 
-- **Python parity for Phoebe + Themis.** Mirror of the existing Kronos / Fortuna `*-python` skill pattern, backed by `titon-network-{phoebe,themis}-sdk` on PyPI.
-- **Phoebe Mode B helper.** Off-chain BLS-partial aggregation for sub-heartbeat freshness reads (Pyth-style update + read in one tx). Tolk side already supported; TS helper is on the v0.6 roadmap.
+- **Python parity for Themis.** Mirror of the existing Kronos / Fortuna / Phoebe `*-python` skill pattern, backed by `titon-network-themis-sdk` on PyPI (Themis Python SDK is on the roadmap; the four Themis skills remain TypeScript-only until it ships).
+- **Phoebe Mode B helper.** Off-chain BLS-partial aggregation for sub-heartbeat freshness reads (Pyth-style update + read in one tx). Tolk side already supported on both flavours; the TS + Python helpers that aggregate operator partials end-to-end are on the v0.6 roadmap.
 - **Themis chamber discovery.** Auto-pickup of new chambers via the factory's `ChamberDeployed` events, so operators serving multiple chambers don't need static config.
 - **MCP auto-wiring.** [`@titon-network/mcp@0.6.0`](https://www.npmjs.com/package/@titon-network/mcp) is published and the team-hosted instance at `mcp.titon.network` is being brought online — once live, Claude can *call* tools (not just generate code that calls them) by pointing your client config at `https://mcp.titon.network`. Next plugin version will register this in your MCP config automatically.
 - **More dev-facing protocols.** Future Titon services that dapp authors consume directly will join the plugin. Operator/admin/infra skills stay in their respective SDK repos.

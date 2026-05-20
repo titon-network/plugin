@@ -8,8 +8,8 @@
         {
             "name": "titon",
             "source": "./titon",
-            "description": "AI-first interface for dapp authors building on the Titon network. Skills for Kronos automation (recurring on-chain jobs, TSA-audited — zero findings), Fortuna threshold-BLS VRF (verifiable randomness, TSA-audited — zero findings), Phoebe price oracle (BLS-attested merkle-root snapshots, TSA-audited — zero findings; consume verified prices with `fetchVerifiedPrice`), and Themis sealed-bid threshold-decryption (MEV-resistant intent execution, TSA-audited — zero findings; deploy a per-dapp chamber + write a Tolk RevealCallback consumer). Auto-loads the right recipe when your conversation matches. Kronos/Fortuna recipes ship in TypeScript + Python flavours; Phoebe + Themis are TypeScript today.",
-            "version": "0.7.0",
+            "description": "AI-first interface for dapp authors building on the Titon network. Skills for Kronos automation (recurring on-chain jobs, TSA-audited — zero findings), Fortuna threshold-BLS VRF (verifiable randomness, TSA-audited — zero findings), Phoebe price oracle (BLS-attested merkle-root snapshots, TSA-audited — zero findings; consume verified prices with `fetchVerifiedPrice` / `fetch_verified_price`; on both npm as `@titon-network/phoebe-sdk` and PyPI as `titon-network-phoebe-sdk`), and Themis sealed-bid threshold-decryption (MEV-resistant intent execution, TSA-audited — zero findings; deploy a per-dapp chamber + write a Tolk RevealCallback consumer). Auto-loads the right recipe when your conversation matches. Kronos / Fortuna / Phoebe recipes ship in TypeScript + Python flavours; Themis is TypeScript today (Python parity follow-up).",
+            "version": "0.8.0",
             "author": {
                 "name": "Titon Network",
                 "url": "https://github.com/titon-network"
